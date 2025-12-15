@@ -1,0 +1,130 @@
+/* Demo Login Page Styles */
+
+.demo-login-container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: calc(100vh - 200px);
+}
+
+.user-card {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: #007bff;
+}
+
+.user-card.selected {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.user-card .card-header {
+  transition: all 0.3s ease;
+}
+
+.user-card:hover .card-header {
+  padding: 1rem;
+}
+
+.credentials {
+  border-left: 4px solid #007bff;
+  background-color: #f8f9fa !important;
+}
+
+.table th {
+  border-top: none;
+  background-color: #f8f9fa;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.badge {
+  font-size: 0.75em;
+  padding: 0.35em 0.65em;
+}
+
+/* Role-specific badges */
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .demo-login-container {
+    padding: 15px;
+  }
+  
+  .card-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .credentials .row {
+    flex-direction: column;
+  }
+  
+  .credentials .col-6 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Animation for login message */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert {
+  animation: slideDown 0.3s ease;
+}
+
+/* Button hover effects */
+.btn-outline-primary:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+/* Card hover effect for permission table */
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  cursor: default;
+}
+
+/* Icon styling */
+.bi {
+  font-size: 1.1em;
+}
+
+.bi-check-circle-fill.text-success {
+  color: #28a745 !important;
+}
+
+.bi-x-circle-fill.text-danger {
+  color: #dc3545 !important;
+}
+
+/* Loading state */
+.user-card.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
