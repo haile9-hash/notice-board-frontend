@@ -9,6 +9,12 @@ const AuthProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
+  // Track user interactions (likes/dislikes)
+  const [userInteractions, setUserInteractions] = useState(() => {
+    const saved = localStorage.getItem('userInteractions');
+    return saved ? JSON.parse(saved) : {};
+  });
+
   const login = (username, password) => {
     const foundUser = mockUsers.find(u => 
       u.username === username && u.password === password
@@ -51,11 +57,35 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
+  // Track user like/dislike actions
+  const trackInteraction = (postId, action) => {
+    if (!user) return;
+    
+    const newInteractions = {
+      ...userInteractions,
+      [postId]: action // 'liked' or 'disliked'
+    };
+    
+    setUserInteractions(newInteractions);
+    localStorage.setItem('userInteractions', JSON.stringify(newInteractions));
+  };
+
+  // Check if user has interacted with a post
+  const getUserInteraction = (postId) => {
+    return userInteractions[postId] || null; // returns 'liked', 'disliked', or null
+  };
+
   useEffect(() => {
     // Auto-login check
     const savedUser = localStorage.getItem('user');
     if (savedUser && !user) {
       setUser(JSON.parse(savedUser));
+    }
+    
+    // Load interactions
+    const savedInteractions = localStorage.getItem('userInteractions');
+    if (savedInteractions) {
+      setUserInteractions(JSON.parse(savedInteractions));
     }
   }, []);
 
@@ -66,7 +96,9 @@ const AuthProvider = ({ children }) => {
       signup, 
       logout, 
       updateUser,
-      isAuthenticated: !!user 
+      isAuthenticated: !!user,
+      trackInteraction,
+      getUserInteraction
     }}>
       {children}
     </AuthContext.Provider>

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from '../components/common/ProtectedRoute';
 
 // Public Pages
-import Home from '../pages/publicPages/Home';   
+import Home from '../pages/publicPages/Home';    
 import LatestNews from '../pages/publicPages/LatestNews';
 import CategoryPosts from '../pages/publicPages/CategoryPosts';
 import FacultyPosts from '../pages/publicPages/FacultyPosts';
@@ -64,6 +64,8 @@ const AppRoutes = () => {
           <SubAdminDashboard />
         </ProtectedRoute>
       } />
+      
+      {/* Create Post Route - Accessible by both Super Admin and Sub Admin */}
       <Route path="/create-post" element={
         <ProtectedRoute requiredRole={['superadmin', 'subadmin']}>
           <CreatePost />
@@ -82,6 +84,7 @@ const AppRoutes = () => {
         <div className="container mt-5 text-center">
           <h1>404 - Page Not Found</h1>
           <p>The page you are looking for does not exist.</p>
+          <a href="/" className="btn btn-primary mt-3">Go to Home</a>
         </div>
       } />
     </Routes>

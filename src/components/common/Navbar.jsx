@@ -61,21 +61,29 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-lg" ref={navbarRef}>
       <div className="container">
         {/* Brand Logo */}
-        <Link className="navbar-brand d-flex align-items-center fw-bold" to="/" onClick={handleLinkClick}>
+        <Link className="navbar-brand d-flex align-items-center" to="/" onClick={handleLinkClick}>
           <Logo />
-          <span className="ms-2 d-none d-sm-inline">BDU Notice Board</span>
-          <span className="ms-2 d-inline d-sm-none">BDU NB</span>
+          <span className="ms-2 fw-bold d-none d-sm-inline">BDU Notice Board</span>
+          <span className="ms-2 fw-bold d-inline d-sm-none">BDU NB</span>
         </Link>
 
-        {/* Mobile Toggle Button */}
+        {/* Mobile Toggle Button with X/Hamburger */}
         <button
-          className="navbar-toggler"
+          className="navbar-toggler border-0"
           type="button"
           onClick={toggleNavbar}
-          aria-expanded={isOpen}
           aria-label="Toggle navigation"
+          aria-expanded={isOpen}
         >
-          <span className="navbar-toggler-icon"></span>
+          {isOpen ? (
+            // X icon when menu is open
+            <span className="navbar-toggler-icon">
+              <i className="bi bi-x-lg text-white" style={{ fontSize: '1.5rem' }}></i>
+            </span>
+          ) : (
+            // Hamburger icon when menu is closed
+            <span className="navbar-toggler-icon"></span>
+          )}
         </button>
 
         {/* Navbar Content */}
@@ -88,8 +96,8 @@ const Navbar = () => {
                 to="/"
                 onClick={handleLinkClick}
               >
-                <i className="bi bi-house-door me-1"></i>
-                <span className="d-none d-md-inline">Home</span>
+                <i className="bi bi-house-door me-2"></i>
+                <span>Home</span>
               </Link>
             </li>
 
@@ -100,8 +108,8 @@ const Navbar = () => {
                 to="/latest-news"
                 onClick={handleLinkClick}
               >
-                <i className="bi bi-newspaper me-1"></i>
-                <span className="d-none d-md-inline">Latest News</span>
+                <i className="bi bi-newspaper me-2"></i>
+                <span>Latest News</span>
               </Link>
             </li>
 
@@ -115,8 +123,8 @@ const Navbar = () => {
                 aria-expanded="false"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="bi bi-grid-3x3-gap me-1"></i>
-                <span className="d-none d-md-inline">Categories</span>
+                <i className="bi bi-grid-3x3-gap me-2"></i>
+                <span>Categories</span>
               </button>
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="categoriesDropdown">
                 {categories.map((category) => (
@@ -155,8 +163,8 @@ const Navbar = () => {
                 aria-expanded="false"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="bi bi-building me-1"></i>
-                <span className="d-none d-md-inline">Faculties</span>
+                <i className="bi bi-building me-2"></i>
+                <span>Faculties</span>
               </button>
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="facultiesDropdown">
                 {faculties.map((faculty) => (
@@ -198,8 +206,11 @@ const Navbar = () => {
                     aria-expanded="false"
                     onClick={(e) => e.preventDefault()}
                   >
-                    <i className="bi bi-person-circle me-1"></i>
-                    <span className="d-none d-md-inline">{user.name || user.username}</span>
+                    <i className="bi bi-person-circle me-2"></i>
+                    <span>{user.name || user.username}</span>
+                    <span className={`badge ms-2 ${user.role === 'superadmin' ? 'bg-danger' : user.role === 'subadmin' ? 'bg-warning text-dark' : 'bg-success'}`}>
+                      {user.role}
+                    </span>
                   </button>
                   <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <li>
@@ -212,6 +223,21 @@ const Navbar = () => {
                         Dashboard
                       </Link>
                     </li>
+                    
+                    {/* Create Post Link (for admins only) */}
+                    {(user.role === 'superadmin' || user.role === 'subadmin') && (
+                      <li>
+                        <Link
+                          className="dropdown-item d-flex align-items-center py-2"
+                          to="/create-post"
+                          onClick={handleLinkClick}
+                        >
+                          <i className="bi bi-plus-circle me-2"></i>
+                          Create Post
+                        </Link>
+                      </li>
+                    )}
+                    
                     <li>
                       <Link
                         className="dropdown-item d-flex align-items-center py-2"
@@ -244,13 +270,6 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </li>
-
-                {/* Role Badge */}
-                <li className="nav-item d-none d-md-flex align-items-center ms-2">
-                  <span className={`badge bg-${getRoleColor(user.role)}`}>
-                    {user.role}
-                  </span>
-                </li>
               </>
             ) : (
               <>
@@ -261,8 +280,8 @@ const Navbar = () => {
                     to="/login"
                     onClick={handleLinkClick}
                   >
-                    <i className="bi bi-box-arrow-in-right me-1"></i>
-                    <span className="d-none d-md-inline">Login</span>
+                    <i className="bi bi-box-arrow-in-right me-2"></i>
+                    <span>Login</span>
                   </Link>
                 </li>
 
@@ -273,8 +292,8 @@ const Navbar = () => {
                     to="/signup"
                     onClick={handleLinkClick}
                   >
-                    <i className="bi bi-person-plus me-1"></i>
-                    <span className="d-none d-md-inline">Signup</span>
+                    <i className="bi bi-person-plus me-2"></i>
+                    <span>Signup</span>
                   </Link>
                 </li>
 
@@ -285,8 +304,8 @@ const Navbar = () => {
                     to="/demo-login"
                     onClick={handleLinkClick}
                   >
-                    <i className="bi bi-rocket-takeoff me-1"></i>
-                    <span className="d-none d-md-inline">Demo</span>
+                    <i className="bi bi-rocket-takeoff me-2"></i>
+                    <span>Demo</span>
                   </Link>
                 </li>
               </>
@@ -296,15 +315,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
-
-const getRoleColor = (role) => {
-  switch (role) {
-    case 'superadmin': return 'danger';
-    case 'subadmin': return 'warning text-dark';
-    case 'user': return 'success';
-    default: return 'secondary';
-  }
 };
 
 export default Navbar;

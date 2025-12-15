@@ -13,7 +13,8 @@ export const mockPosts = [
     comments: [
       { id: 1, user: 'student1', text: 'Great news!', date: '2025-12-01' }
     ],
-    photo: '/src/assets/images/library.jpg'
+    photo: '/src/assets/images/library.jpg',
+    isImportant: true
   },
   {
     id: 2,
@@ -27,7 +28,8 @@ export const mockPosts = [
     likes: 32,
     dislikes: 5,
     comments: [],
-    photo: '/src/assets/images/cafeteria.jpg'
+    photo: '/src/assets/images/cafeteria.jpg',
+    isImportant: false
   },
   {
     id: 3,
@@ -41,7 +43,8 @@ export const mockPosts = [
     likes: 89,
     dislikes: 1,
     comments: [],
-    photo: '/src/assets/images/sports.jpg'
+    photo: '/src/assets/images/sports.jpg',
+    isImportant: true
   },
   {
     id: 4,
@@ -55,7 +58,8 @@ export const mockPosts = [
     likes: 23,
     dislikes: 0,
     comments: [],
-    photo: null
+    photo: null,
+    isImportant: false
   },
   {
     id: 5,
@@ -69,7 +73,8 @@ export const mockPosts = [
     likes: 67,
     dislikes: 3,
     comments: [],
-    photo: null
+    photo: null,
+    isImportant: true
   },
   {
     id: 6,
@@ -83,7 +88,8 @@ export const mockPosts = [
     likes: 15,
     dislikes: 1,
     comments: [],
-    photo: '/src/assets/images/computing.jpg'
+    photo: '/src/assets/images/computing.jpg',
+    isImportant: false
   },
   {
     id: 7,
@@ -97,7 +103,8 @@ export const mockPosts = [
     likes: 0,
     dislikes: 0,
     comments: [],
-    photo: '/src/assets/images/electrical.jpg'
+    photo: '/src/assets/images/electrical.jpg',
+    isImportant: false
   },
   {
     id: 8,
@@ -111,7 +118,8 @@ export const mockPosts = [
     likes: 28,
     dislikes: 0,
     comments: [],
-    photo: null
+    photo: null,
+    isImportant: false
   },
   {
     id: 9,
@@ -125,7 +133,8 @@ export const mockPosts = [
     likes: 19,
     dislikes: 0,
     comments: [],
-    photo: null
+    photo: null,
+    isImportant: true
   },
   {
     id: 10,
@@ -139,6 +148,7 @@ export const mockPosts = [
     likes: 0,
     dislikes: 0,
     comments: [],
-    photo: null
+    photo: null,
+    isImportant: false
   }
 ];

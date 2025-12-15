@@ -42,9 +42,16 @@ const Login = () => {
         // Show success message
         setError('');
         
-        // Redirect based on role
+        // REDIRECT BASED ON USER ROLE
         setTimeout(() => {
-          navigate(`/${result.user.role}-dashboard`);
+          if (result.user.role === 'superadmin') {
+            navigate('/superadmin-dashboard');
+          } else if (result.user.role === 'subadmin') {
+            navigate('/subadmin-dashboard');
+          } else {
+            // Regular users go to home page
+            navigate('/');
+          }
         }, 500);
       } else {
         setError(result.message || 'Invalid username or password');
@@ -82,7 +89,7 @@ const Login = () => {
                   <i className="bi bi-shield-lock-fill text-white display-4"></i>
                 </div>
                 <h1 className="fw-bold mb-2 text-white">Welcome Back</h1>
-                <p className="text-white-50">Sign in to your BDU Notice Board account</p>
+                <p className="text-white">Sign in to your BDU Notice Board account</p>
               </div>
 
               {/* Error Message */}
